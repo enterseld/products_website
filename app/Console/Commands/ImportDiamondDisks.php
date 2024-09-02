@@ -29,8 +29,8 @@ class ImportDiamondDisks extends Command
         DB::delete('delete from diamond_drills;');
         DB::delete('delete from pictures_flexible_polishing_pads;');
         DB::delete('delete from flexible_polishing_pads;');
-        DB::delete('delete from pictures_adapters_extensons;');
-        DB::delete('delete from adapters_extensons;');
+        DB::delete('delete from pictures_adapters_extensions;');
+        DB::delete('delete from adapters_extensions;');
         DB::delete('delete from pictures_polishing_instruments;');
         DB::delete('delete from polishing_instruments;');
         DB::delete('delete from pictures_instruments_equipment;');
@@ -358,10 +358,10 @@ class ImportDiamondDisks extends Command
                 ];
                 $idAdapters+=1;
                 // Insert the product into the diamondDisks table
-                DB::table('adapters_extensons')->insert($productAdapters);
+                DB::table('adapters_extensions')->insert($productAdapters);
                 // Insert pictures into the pictures table
                 foreach ($product->picture as $picture) {
-                    DB::table('pictures_adapters_extensons')->insert([
+                    DB::table('pictures_adapters_extensions')->insert([
                         'id' => (int)$idAdaptersPictures,
                         'vendor_code' => (int)$product->vendorCode,
                         'picture' => (string)$picture,

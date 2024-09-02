@@ -16,13 +16,13 @@ class AdaptersExtensionsController
     {
         // Display all products with their images
         $products = AdaptersExtensions::with('images')->get();
-        return view('products.adaptersExtensions.index', compact('products'));
+        return view('products.AdaptersExtensions.index', compact('products'));
     }
 
     public function create()
     {
         // Show form to create a new product
-        return view('products.adaptersExtensions.create');
+        return view('products.AdaptersExtensions.create');
     }
 
     public function store(Request $request)
@@ -42,13 +42,16 @@ class AdaptersExtensionsController
             }
         }
 
-        return redirect()->route('products.adaptersExtensions.index');
+        return redirect()->route('products.AdaptersExtensions.index');
     }
 
-    public function show($id)
+    public function show($vendor_code)
     {
-        $product = AdaptersExtensions::with('images')->findOrFail($id);
-        return view('products.adaptersExtensions.show', compact('product'));
+        // Fetch the product by its ID
+        $product = AdaptersExtensions::with('images')->where('vendor_code', $vendor_code)->firstOrFail();
+
+        // Pass the product to the view
+        return view('products.show', compact('product'));
     }
 
     /**

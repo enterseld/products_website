@@ -21,9 +21,8 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/shop', [AdaptersExtensionsController::class, 'shop'])->name('shop.index');  
-Route::get('/shop/AdaptersExtensionsController', [AdaptersExtensionsController::class, 'index'])->name('shop.AdaptersExtensions');
-Route::get('/shop/AdaptersExtensionsController/{id}', [AdaptersExtensionsController::class, 'show'])->name('shop.AdaptersExtensions.show');
+
+Route::get('/AdaptersExtensionsController/{id}', [AdaptersExtensionsController::class, 'show'])->name('AdaptersExtensions');
 Route::get('/shop/AnyAdjustmentController', [AnyAdjustmentController::class, 'index'])->name('shop.category2');
 Route::get('/shop/AnyAdjustmentController/{id}', [AnyAdjustmentController::class, 'show'])->name('shop.category2.show');
 Route::get('/shop/DiamondDisksController', [DiamondDisksController::class, 'index'])->name('shop.category1');

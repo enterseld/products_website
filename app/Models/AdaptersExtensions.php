@@ -11,6 +11,6 @@ class AdaptersExtensions extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesAdaptersExtensions::class);
+        return $this->hasMany(PicturesAdaptersExtensions::class, 'vendor_code', 'vendor_code');
     }
 }
