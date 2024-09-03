@@ -22,7 +22,8 @@ use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::get('/AdaptersExtensionsController/{id}', [AdaptersExtensionsController::class, 'show'])->name('AdaptersExtensions');
+Route::get('/AdaptersExtensions/{id}', [AdaptersExtensionsController::class, 'show'])->name('AdaptersExtensions');
+
 Route::get('/shop/AnyAdjustmentController', [AnyAdjustmentController::class, 'index'])->name('shop.category2');
 Route::get('/shop/AnyAdjustmentController/{id}', [AnyAdjustmentController::class, 'show'])->name('shop.category2.show');
 Route::get('/shop/DiamondDisksController', [DiamondDisksController::class, 'index'])->name('shop.category1');
@@ -37,3 +38,8 @@ Route::get('/shop/MillsController', [MillsController::class, 'index'])->name('sh
 Route::get('/shop/MillsController/{id}', [MillsController::class, 'show'])->name('shop.category2.show');
 Route::get('/shop/PolishingInstrumentsController', [PolishingInstrumentsController::class, 'index'])->name('shop.category2');
 Route::get('/shop/PolishingInstrumentsController/{id}', [PolishingInstrumentsController::class, 'show'])->name('shop.category2.show');
+
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');

@@ -19,7 +19,13 @@
         @endif
 
         <p>{{ $product->description }}</p>
-        <p><strong>Price: ${{ $product->price }}</strong></p>
+        <p><strong>Price: {{ $product->price }}{{ $product->currency_id }}</strong></p>
+        <form action="{{ route('cart.add') }}" method="POST">
+            @csrf
+            <input type="hidden" name="vendor_code" value="{{ $product->vendor_code }}">
+            <input type="hidden" name="product_type" value="{{ $product->category_id }}"> 
+            <button type="submit" style="padding: 10px 20px; font-size: 16px;">Add to Cart</button>
+        </form>
 
     </div>
 </body>
