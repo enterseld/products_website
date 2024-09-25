@@ -11,6 +11,6 @@ class InstrumentsEquipment extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesInstrumentsEquipment::class);
+        return $this->hasMany(PicturesInstrumentsEquipment::class, 'vendor_code', 'vendor_code');
     }
 }

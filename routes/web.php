@@ -20,26 +20,14 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MainPageController;
 
+Route::get('/', [MainPageController::class, 'index'])->name('main.index');
+// API route to fetch product data
+Route::get('/products/{id}', [AdaptersExtensionsController::class, 'show'])->name('AdaptersExtensions.show');
 
-Route::get('/AdaptersExtensions/{id}', [AdaptersExtensionsController::class, 'show'])->name('AdaptersExtensions');
+use App\Http\Controllers\CatalogController;
 
-Route::get('/shop/AnyAdjustmentController', [AnyAdjustmentController::class, 'index'])->name('shop.category2');
-Route::get('/shop/AnyAdjustmentController/{id}', [AnyAdjustmentController::class, 'show'])->name('shop.category2.show');
-Route::get('/shop/DiamondDisksController', [DiamondDisksController::class, 'index'])->name('shop.category1');
-Route::get('/shop/DiamondDisksController/{id}', [DiamondDisksController::class, 'show'])->name('shop.category1.show');
-Route::get('/shop/DrillsAdjustmentController', [DrillsAdjustmentController::class, 'index'])->name('shop.category2');
-Route::get('/shop/DrillsAdjustmentController/{id}', [DrillsAdjustmentController::class, 'show'])->name('shop.category2.show');
-Route::get('/shop/FlexiblePolishingPadsController', [FlexiblePolishingPadsController::class, 'index'])->name('shop.category2');
-Route::get('/shop/FlexiblePolishingPadsController/{id}', [FlexiblePolishingPadsController::class, 'show'])->name('shop.category2.show');
-Route::get('/shop/InstrumentsEquipmentController', [InstrumentsEquipmentController::class, 'index'])->name('shop.category2');
-Route::get('/shop/InstrumentsEquipmentController/{id}', [InstrumentsEquipmentController::class, 'show'])->name('shop.category2.show');
-Route::get('/shop/MillsController', [MillsController::class, 'index'])->name('shop.category2');
-Route::get('/shop/MillsController/{id}', [MillsController::class, 'show'])->name('shop.category2.show');
-Route::get('/shop/PolishingInstrumentsController', [PolishingInstrumentsController::class, 'index'])->name('shop.category2');
-Route::get('/shop/PolishingInstrumentsController/{id}', [PolishingInstrumentsController::class, 'show'])->name('shop.category2.show');
-
-
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/catalog/{vendor_code}', [CatalogController::class, 'show'])->name('catalog.show');
+Route::get('/catalog/category/{category_id}', [CatalogController::class, 'filterByCategory'])->name('catalog.filter');

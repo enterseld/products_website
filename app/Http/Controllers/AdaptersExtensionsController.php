@@ -54,6 +54,11 @@ class AdaptersExtensionsController
         return view('products.show', compact('product'));
     }
 
+    public function getProduct($id) {
+        $product = AdaptersExtensions::findOrFail($id); // Or other models based on type
+        $product->images = $product->pictures;   // Assuming you have a relation for images
+        return response()->json($product);
+    }
     /**
      * Show the form for editing the specified resource.
      */

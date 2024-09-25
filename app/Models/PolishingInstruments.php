@@ -11,6 +11,6 @@ class PolishingInstruments extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesPolishingInstruments::class);
+        return $this->hasMany(PicturesPolishingInstruments::class, 'vendor_code', 'vendor_code');
     }
 }

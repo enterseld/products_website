@@ -11,6 +11,6 @@ class DrillsAdjustment extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesDrillsAdjustment::class);
+        return $this->hasMany(PicturesDrillsAdjustment::class, 'vendor_code', 'vendor_code');
     }
 }

@@ -11,6 +11,6 @@ class FlexiblePolishingPads extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesFlexiblePolishingPads::class);
+        return $this->hasMany(PicturesFlexiblePolishingPads::class, 'vendor_code', 'vendor_code');
     }
 }
