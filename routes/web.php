@@ -13,6 +13,7 @@ use App\Http\Controllers\MillsController;
 use App\Http\Controllers\PolishingInstrumentsController;
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShippingController;
@@ -21,13 +22,17 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MainPageController;
+use App\Http\Controllers\ProductController;
 
-Route::get('/', [MainPageController::class, 'index'])->name('main.index');
-// API route to fetch product data
-Route::get('/products/{id}', [AdaptersExtensionsController::class, 'show'])->name('AdaptersExtensions.show');
+Route::get('/', function () {return view('welcome');});
+Route::get('/catalog', function () {return view('catalog');});
+Route::get('/product/{vendor_code}/{product_type}', function ($vendor_code, $product_type) {
+    $category_id = $product_type;
+    return view('product', compact('vendor_code', 'category_id'));
+});
 
-use App\Http\Controllers\CatalogController;
+Route::get('/api/products', [MainPageController::class, 'index']);
+Route::get('/api/catalog', [CatalogController::class, 'index']);
+Route::get('/api/product/{vendor_code}/{product_type}', [ProductController::class, 'show']);
 
-Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
-Route::get('/catalog/{vendor_code}', [CatalogController::class, 'show'])->name('catalog.show');
-Route::get('/catalog/category/{category_id}', [CatalogController::class, 'filterByCategory'])->name('catalog.filter');
+

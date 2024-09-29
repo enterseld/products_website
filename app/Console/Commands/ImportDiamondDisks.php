@@ -58,9 +58,61 @@ class ImportDiamondDisks extends Command
         $idPolishingPictures = 1;
         $idInstrumentsPictures = 1;
         $checker = 0;
+        $counter = 0;
 
         foreach ($xml->shop->offers->offer as $product) {
             if ((int)$product->categoryId == 2) {
+                if((int)$product->vendorCode == "89568442044"){
+                    if($counter == 0){
+                    $counter +=1;
+                    $productDataDiamondDisks = [
+                        'id' => (int)$idDiamondDisks,
+                        'name_product' => (string)$product->name,
+                        'name_ua' => (string)$product->name_ua,
+                        'meashure' => (string)$product->meashure,
+                        'price' => (float)$product->price,
+                        'currency_id' => (string)$product->currencyId,
+                        'category_id' => (int)$product->categoryId,
+                        'vendor_code' => (int)$product->vendorCode,
+                        'country' => (string)$product->country,
+                        'vendor' => (string)$product->vendor,
+                        'keywords' => (string)$product->keywords,
+                        'keywords_ua' => (string)$product->keywords_ua,
+                        'product_description' => (string)$product->description,
+                        'description_ua' => (string)$product->description_ua,
+                        'vendor_mark' => (string)$product->xpath("param[@name='Торгівельна марка']")[0],
+                        'barcode' => (string)$product->xpath("param[@name='Код ЕАН (штрих-код)']")[0],
+                        'code_uktzed' => (string)$product->xpath("param[@name='Код УКТ ЗЭД']")[0],
+                        'guarantee' => (string)$product->xpath("param[@name='Гарантія']")[0],
+                        'disk_type' => (string)$product->xpath("param[@name='Вид диска']")[0],
+                        'work_materials' => (string)$product->xpath("param[@name='Робочий матеріал']")[0],
+                        'diameter_of_disk' => (int)$product->xpath("param[@name='Діаметр, мм']")[0],
+                        'diameter_of_fit' => isset($product->xpath("param[@name='Діаметр посадкового отвору, мм']")[0]) ? (int)$product->xpath("param[@name='Діаметр посадкового отвору, мм']")[0] : null,
+                        'compatibility' => (string)$product->xpath("param[@name='Сумісність із яким інструментом']")[0],
+                        'type_of_segments' => (string)$product->xpath("param[@name='Тип']")[0],
+                        'mass_without_package' => (double)$product->xpath("param[@name='Вага без упаковки, кг']")[0],
+                        'mass_in_package' => (double)$product->xpath("param[@name='Вага в упаковці, кг']")[0],
+                        'height_without_package' => isset($product->xpath("param[@name='Висота без упаковки, мм']")[0]) ? (string)$product->xpath("param[@name='Висота без упаковки, мм']")[0] : null,
+                        'height_in_package' => isset($product->xpath("param[@name='Висота в упаковці, мм']")[0]) ? (double)$product->xpath("param[@name='Висота в упаковці, мм']")[0] : null,
+                        'diamond_layer_height' => isset($product->xpath("param[@name='Висота алмазного шару, мм']")[0]) ? (double)$product->xpath("param[@name='Висота алмазного шару, мм']")[0] : null,
+                        'diamond_layer_width' => isset($product->xpath("param[@name='Товщина алмазного шару, мм']")[0]) ? (double)$product->xpath("param[@name='Товщина алмазного шару, мм']")[0] : null,
+                        'available' => (string)$product['available'] === "true",
+                    ];
+                    $idDiamondDisks+=1;
+                    // Insert the product into the diamondDisks table
+                    DB::table('diamond_disks')->insert($productDataDiamondDisks);
+                    // Insert pictures into the pictures table
+                    foreach ($product->picture as $picture) {
+                        DB::table('pictures_diamond_disks')->insert([
+                            'id' => (int)$idDiamondDisksPictures,
+                            'vendor_code' => (int)$product->vendorCode,
+                            'picture' => (string)$picture,
+                        ]);
+                        $idDiamondDisksPictures+=1;
+                    }
+                    }
+                }
+                else {
                 $productDataDiamondDisks = [
                     'id' => (int)$idDiamondDisks,
                     'name_product' => (string)$product->name,
@@ -107,6 +159,7 @@ class ImportDiamondDisks extends Command
                     $idDiamondDisksPictures+=1;
                 }
             }
+        }
             if ((int)$product->categoryId == 101) {
                 $productDataDrillsAdjustment = [
                     'id' => (int)$idDrillsAdjustment,
