@@ -8,7 +8,7 @@ class AdaptersExtensions extends Migration
 {
     public function up()
     {
-        Schema::create('adapters_extensons', function (Blueprint $table) {
+        Schema::create('adapters_extensions', function (Blueprint $table) {
             $table->id();
             $table->string('name_product');
             $table->string('name_ua');
@@ -40,6 +40,6 @@ class AdaptersExtensions extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('adapters_extensons');
+        Schema::dropIfExists('adapters_extensions');
     }
 }

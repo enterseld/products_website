@@ -11,6 +11,6 @@ class DiamondDrills extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesDiamondDrills::class);
+        return $this->hasMany(PicturesDiamondDrills::class, 'vendor_code', 'vendor_code');
     }
 }

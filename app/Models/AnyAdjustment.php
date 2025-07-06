@@ -11,6 +11,6 @@ class AnyAdjustment extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesAnyAdjustment::class);
+        return $this->hasMany(PicturesAnyAdjustment::class, 'vendor_code', 'vendor_code');
     }
 }

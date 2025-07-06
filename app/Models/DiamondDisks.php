@@ -11,6 +11,6 @@ class DiamondDisks extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesDiamondDisks::class);
+        return $this->hasMany(PicturesDiamondDisks::class, 'vendor_code', 'vendor_code');
     }
 }

@@ -11,6 +11,6 @@ class Mills extends Model
 
     public function images()
     {
-        return $this->hasMany(PicturesMills::class);
+        return $this->hasMany(PicturesMills::class, 'vendor_code', 'vendor_code');
     }
 }

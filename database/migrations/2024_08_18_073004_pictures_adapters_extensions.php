@@ -8,17 +8,17 @@ class PicturesAdaptersExtensions extends Migration
 {
     public function up()
     {
-        Schema::create('pictures_adapters_extensons', function (Blueprint $table) {
+        Schema::create('pictures_adapters_extensions', function (Blueprint $table) {
             $table->id();
             $table->double('vendor_code');
             $table->string('picture', 255);
-            $table->foreign('vendor_code')->references('vendor_code')->on('adapters_extensons')->onDelete('cascade');
+            $table->foreign('vendor_code')->references('vendor_code')->on('adapters_extensions')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('pictures_adapters_extensons');
+        Schema::dropIfExists('pictures_adapters_extensions');
     }
 }
